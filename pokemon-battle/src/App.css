@@ -417,12 +417,16 @@ body {
   .app-container {
     height: auto;
     overflow: visible;
-    padding: 30px 15px;
+    padding: 20px 10px;
+  }
+
+  .app-title {
+    font-size: 1.8rem;
   }
   
   .main-content {
     flex-direction: column;
-    gap: 30px;
+    gap: 25px;
     height: auto;
     overflow: visible;
   }
@@ -431,19 +435,31 @@ body {
     height: auto;
     overflow: visible;
   }
+
+  .battle-arena {
+    flex-direction: column;
+    gap: 15px;
+    height: auto;
+    overflow: visible;
+  }
   
   .pokemon-card {
     max-height: none;
     height: auto;
+    width: 250px; /* Maintain standard width on mobile */
   }
 
   .placeholder-arena {
     height: auto;
-    padding: 60px 20px;
+    padding: 50px 20px;
   }
 
   .battle-log-box {
-    height: 350px;
+    height: 300px;
+  }
+  
+  .btn-battle {
+    margin-top: 15px;
   }
 }
 
