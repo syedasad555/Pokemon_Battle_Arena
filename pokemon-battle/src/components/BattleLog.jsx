@@ -17,8 +17,15 @@ function BattleLog({ logs }) {
       <div className="battle-log-box" ref={logBoxRef}>
         {hasLogs ? (
           logs.map((log, index) => (
-            <div key={index} className={`battle-log-line log-${log.type}`}>
-              {log.text}
+            <div key={index} className={`battle-log-line log-${log.type}`} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              {log.pokemonImage && (
+                <img 
+                  src={log.pokemonImage} 
+                  alt="" 
+                  style={{ width: '24px', height: '24px', objectFit: 'contain', flexShrink: 0 }}
+                />
+              )}
+              <span>{log.text}</span>
             </div>
           ))
         ) : (

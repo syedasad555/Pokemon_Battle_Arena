@@ -138,7 +138,7 @@ function App() {
       } else {
         setPokemon2(newPokemon);
       }
-      addLog(`🔄 Rerolled Player ${playerIndex}! ${capitalize(newPokemon.name)} enters the arena!`, 'start');
+      addLog(`Player ${playerIndex} rerolled! ${capitalize(newPokemon.name)} enters the arena!`, 'start', newPokemon.image);
     } catch (err) {
       setError('Failed to reroll Pokémon.');
     } finally {
@@ -149,8 +149,8 @@ function App() {
 
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-  const addLog = (text, type = 'start') => {
-    setBattleLogs((prev) => [...prev, { text, type }]);
+  const addLog = (text, type = 'start', pokemonImage = null) => {
+    setBattleLogs((prev) => [...prev, { text, type, pokemonImage }]);
   };
 
   // Turn-based real-time battle simulation
@@ -167,7 +167,7 @@ function App() {
     setHp1(100);
     setHp2(100);
 
-    addLog('⚔️ The battle begins in the arena!', 'start');
+    addLog('The battle begins in the arena!', 'start', '/pokeball-pokemon-svgrepo-com.svg');
     await sleep(1000);
 
     // Coin flip for first turn (1 or 2)
@@ -185,7 +185,7 @@ function App() {
 
         currentHp2 = Math.max(0, currentHp2 - damage);
         
-        addLog(`💥 ${capitalize(pokemon1.name)} uses ${capitalize(selectedMove.name)}! It deals ${damage} damage.`, 'p1-attack');
+        addLog(`${capitalize(pokemon1.name)} uses ${capitalize(selectedMove.name)}! It deals ${damage} damage.`, 'p1-attack', pokemon1.image);
         setHp2(currentHp2);
         
         // Shake target card
@@ -196,7 +196,7 @@ function App() {
         await sleep(1200);
 
         if (currentHp2 <= 0) {
-          addLog(`💀 ${capitalize(pokemon2.name)} has fainted!`, 'faint');
+          addLog(`${capitalize(pokemon2.name)} has fainted!`, 'faint', pokemon2.image);
           await sleep(600);
           break;
         }
@@ -212,7 +212,7 @@ function App() {
 
         currentHp1 = Math.max(0, currentHp1 - damage);
         
-        addLog(`⚡ ${capitalize(pokemon2.name)} uses ${capitalize(selectedMove.name)}! It deals ${damage} damage.`, 'p2-attack');
+        addLog(`${capitalize(pokemon2.name)} uses ${capitalize(selectedMove.name)}! It deals ${damage} damage.`, 'p2-attack', pokemon2.image);
         setHp1(currentHp1);
         
         // Shake target card
@@ -223,7 +223,7 @@ function App() {
         await sleep(1200);
 
         if (currentHp1 <= 0) {
-          addLog(`💀 ${capitalize(pokemon1.name)} has fainted!`, 'faint');
+          addLog(`${capitalize(pokemon1.name)} has fainted!`, 'faint', pokemon1.image);
           await sleep(600);
           break;
         }
@@ -234,10 +234,10 @@ function App() {
     setActiveAttacker(null);
 
     if (currentHp1 > 0) {
-      addLog(`🏆 Victory! ${capitalize(pokemon1.name)} wins the battle!`, 'victory');
+      addLog(`${capitalize(pokemon1.name)} wins the battle!`, 'victory', pokemon1.image);
       setWinner(1);
     } else {
-      addLog(`🏆 Victory! ${capitalize(pokemon2.name)} wins the battle!`, 'victory');
+      addLog(`${capitalize(pokemon2.name)} wins the battle!`, 'victory', pokemon2.image);
       setWinner(2);
     }
 
